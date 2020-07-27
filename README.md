@@ -19,7 +19,7 @@ You have to pass an array like that to the component
 <br />
 actually you have some other options like: 
 <br />
-`
+```
 <TreeMenu
   menuItems={[]}
   iconColor='gray'
@@ -28,7 +28,7 @@ actually you have some other options like:
   hasLabelIcon
   leftSideLabel
 />
-`
+```
 
 ## Available Scripts
 

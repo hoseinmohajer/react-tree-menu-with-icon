@@ -1,5 +1,35 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to use
+
+You have to pass an array like that to the component
+`
+{
+    id: 1,
+    title: 'level one',
+    children: [
+      {
+        id: 11,
+        title: 'level two',
+        children: [],
+      },
+    ],
+  }
+`
+<br />
+actually you have some other options like: 
+<br />
+`
+<TreeMenu
+  menuItems={[]}
+  iconColor='gray'
+  fontColor='black'
+  labelIcon='ICON_NAME'
+  hasLabelIcon
+  leftSideLabel
+/>
+`
+
 ## Available Scripts
 
 In the project directory, you can run:

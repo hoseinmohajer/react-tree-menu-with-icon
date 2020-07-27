@@ -60,6 +60,8 @@ function App() {
       menuItems={menuItems}
       iconColor='gray'
       fontColor='black'
+      hasLabelIcon
+      leftSideLabel
     />
   );
 }

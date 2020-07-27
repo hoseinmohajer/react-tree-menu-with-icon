@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MenuTreeWrapper, LabelIcon, TreeMenuTitle } from './style';
 
-export default ({menuItems, labelIcon, leftSideLabel, iconColor, fontColor}) => {
+export default ({menuItems, labelIcon, leftSideLabel, iconColor, fontColor, hasLabelIcon}) => {
   const [hiddenIds, setHiddenIds] = useState([]);
   const [checkedIds, setCheckedIds] = useState([]);
   const toggle = (id) => {
@@ -57,7 +57,7 @@ export default ({menuItems, labelIcon, leftSideLabel, iconColor, fontColor}) => 
                       checked={checkedIds.indexOf(item.id) !== -1}
                       onChange={() => onChangeHandler(item.id, item.children)}
                     />
-                    <LabelIcon className={`sitemap-icon ${labelIcon || 'icon-sitemap'}`} iconColor={iconColor}/>
+                    {hasLabelIcon && <LabelIcon className={`sitemap-icon ${labelIcon || 'icon-sitemap'}`} iconColor={iconColor}/>}
                     <TreeMenuTitle fontColor={fontColor}>{item.title}</TreeMenuTitle>
                   </div>
                   {leftSideLabel &&

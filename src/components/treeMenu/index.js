@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MenuTreeWrapper, LabelIcon, TreeMenuTitle } from './style';
 
-export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIcon}) => {
+export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIcon, onChange}) => {
   const [menuItems, setMenuItems] = useState(data);
   const [hiddenIds, setHiddenIds] = useState([]);
   const toggle = (id) => {
@@ -19,7 +19,8 @@ export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIc
     } else {
       result = toggleCheckbox(items, id, status);
     }
-    return setMenuItems(result);
+    setMenuItems(result);
+    onChange(result);
   };
 
   const toggleCheckbox = (array, id, status) => {

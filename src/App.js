@@ -96,6 +96,9 @@ const menuItems = [
 ];
 
 function App() {
+  const onChange = (data) => {
+    console.log(data);
+  }
   return (
     <TreeMenu
       data={menuItems}
@@ -103,6 +106,7 @@ function App() {
       fontColor='black'
       hasItemIcon
       leftSideLabel
+      onChange={onChange}
     />
   );
 }

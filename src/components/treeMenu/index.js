@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MenuTreeWrapper, LabelIcon, TreeMenuTitle } from './style';
 
-export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasLabelIcon}) => {
+export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIcon}) => {
   const [menuItems, setMenuItems] = useState(data);
   const [hiddenIds, setHiddenIds] = useState([]);
   const toggle = (id) => {
@@ -11,49 +11,30 @@ export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasLabelI
       setHiddenIds(hiddenIds.concat([id]));
     }
   };
-  let IDs = [];
-  const getChildrenId = (childrenArray) => {
-    childrenArray.forEach((item) => {
-      IDs.push(item.id);
-      if (item.children && item.children.length !== 0) {
-        getChildrenId(item.children);
-      }
-    });
-    return IDs;
-  };
   const onChangeHandler = (id, status) => {
     const items = JSON.parse(JSON.stringify(menuItems));
     let result = [];
     if (status) {
-      result = unChecked(items, id);
+      result = toggleCheckbox(items, id, status);
     } else {
-      result = checked(items, id);
+      result = toggleCheckbox(items, id, status);
     }
     return setMenuItems(result);
   };
 
-  const checked = (array, id) => {
+  const toggleCheckbox = (array, id, status) => {
     for (let i = 0; i < array.length; i++) {
       if (array[i].id === id) {
-        array[i].checked = true;
-        if (array[i].children && array[i].children.length !== 0) {
-          for (let j = 0; j < array[i].children.length; j++) {
-            checked(array[i].children, array[i].children[j].id);
+        array[i].checked = !status;
+        if (!status) {
+          if (array[i].children && array[i].children.length !== 0) {
+            for (let j = 0; j < array[i].children.length; j++) {
+              toggleCheckbox(array[i].children, array[i].children[j].id, status);
+            }
           }
         }
       } else {
-        checked(array[i].children, id);
-      }
-    }
-    setMenuItems(array);
-    return array;
-  };
-  const unChecked = (array, id) => {
-    for (let i = 0; i < array.length; i++) {
-      if (array[i].id === id) {
-        array[i].checked = false;
-      } else {
-        unChecked(array[i].children, id);
+        toggleCheckbox(array[i].children, id, status);
       }
     }
     setMenuItems(array);
@@ -82,12 +63,24 @@ export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasLabelI
                       checked={(item.checked)}
                       onChange={() => onChangeHandler(item.id, item.checked)}
                     />
-                    {hasLabelIcon && <LabelIcon className={`sitemap-icon ${labelIcon || 'icon-sitemap'}`} iconColor={iconColor}/>}
+                    {hasItemIcon &&
+                      <LabelIcon
+                        className={`sitemap-icon ${labelIcon || 'icon-sitemap'}`} iconColor={iconColor}
+                      />
+                    }
                     <TreeMenuTitle fontColor={fontColor}>{item.title}</TreeMenuTitle>
                   </div>
                   {leftSideLabel &&
                   <div className="left-side">
-                    <div className="tree-menu-label tree-menu-label-success">ON</div>
+                    <div
+                      className={`tree-menu-label
+                        ${(item.active) ?
+                          'tree-menu-label-success' :
+                          'tree-menu-label-warning'}`
+                      }
+                    >
+                      {item.active ? 'on' : 'disable'}
+                    </div>
                   </div>
                   }
                 </li>

@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## How to use
 
 You have to pass an array like that to the component
-`
+```
 {
     id: 1,
     title: 'level one',
@@ -15,7 +15,7 @@ You have to pass an array like that to the component
       },
     ],
   }
-`
+```
 <br />
 actually you have some other options like: 
 <br />

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const MenuTreeWrapper = styled.div`
   .tree-menu-ul {
-  direction: rtl;
-}
+    direction: rtl;
+  }
 .tree-menu-li {
   list-style: none;
   position: relative;

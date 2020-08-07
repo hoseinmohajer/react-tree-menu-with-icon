@@ -14,11 +14,7 @@ export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIc
   const onChangeHandler = (id, status) => {
     const items = JSON.parse(JSON.stringify(menuItems));
     let result = [];
-    if (status) {
-      result = toggleCheckbox(items, id, status);
-    } else {
-      result = toggleCheckbox(items, id, status);
-    }
+    result = toggleCheckbox(items, id, status);
     setMenuItems(result);
     onChange(result);
   };
@@ -38,7 +34,6 @@ export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIc
         toggleCheckbox(array[i].children, id, status);
       }
     }
-    setMenuItems(array);
     return array;
   };
   const menuEngine = (menuItems) => {
@@ -46,7 +41,6 @@ export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIc
       <MenuTreeWrapper>
         <ul className="tree-menu-ul">
           {menuItems.map((item) => {
-            console.log(item);
             const status = item.children && item.children.length !== 0 && hiddenIds.indexOf(item.id) === -1;
             const hasChildren = item.children && item.children.length !== 0;
             return (
@@ -69,7 +63,12 @@ export default ({data, labelIcon, leftSideLabel, iconColor, fontColor, hasItemIc
                         className={`sitemap-icon ${labelIcon || 'icon-sitemap'}`} iconColor={iconColor}
                       />
                     }
-                    <TreeMenuTitle fontColor={fontColor}>{item.title}</TreeMenuTitle>
+                    <TreeMenuTitle
+                      fontColor={fontColor}
+                    >
+                      {item.title}
+                    </TreeMenuTitle>
+
                   </div>
                   {leftSideLabel &&
                   <div className="left-side">

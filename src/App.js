@@ -1,5 +1,5 @@
 import React from 'react';
-import TreeMenu from './components/treeMenu'
+import TreeMenu from './components/treeMenu';
 
 const menuItems = [
   {
@@ -102,8 +102,8 @@ function App() {
   return (
     <TreeMenu
       data={menuItems}
-      iconColor='gray'
-      fontColor='black'
+      iconColor='green'
+      fontColor='red'
       hasItemIcon
       leftSideLabel
       onChange={onChange}
